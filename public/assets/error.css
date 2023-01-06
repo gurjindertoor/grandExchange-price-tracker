@@ -1,0 +1,25 @@
+body,
+html {
+    height: 100%;
+}
+
+.bg {
+    background: black;
+    /* background-image: url(images/osrs_wallpaper.jpg); */
+    /* background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+.nav-items {
+    color: black;
+}
+
+.error-msg {
+    text-align: center;
+    margin: auto;
+    /* color: #fff; */
+    padding: 250px 0;
+    font-weight: bolder;
+    color: white;
+}

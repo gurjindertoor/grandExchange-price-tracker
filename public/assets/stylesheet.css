@@ -1,0 +1,81 @@
+body,
+html {
+    height: 100%;
+}
+
+.bg {
+    background: #fff;
+    background-image: url(images/rs4k2.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media only screen and (max-device-width: 500px) {
+    .bg {
+        background: #fff;
+        background-image: url(images/rsalt.jpeg);
+        background-position: center;
+        background-size: cover;
+        z-index: -1;
+    }
+}
+
+@media only screen and (min-device-width: 2560px) {
+    .bg {
+        background-image: url(images/rs4k2.jpeg)
+    }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.2;
+    height: 100%;
+    width: 100%;
+}
+
+.search-box {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%)
+}
+
+.btn.btn-search {
+    border-radius: 0;
+    height: 50px;
+    background: #7d2218;
+    color: #fff;
+}
+
+.btn.btn-search:hover {
+    background: #7d2218
+}
+
+
+.search-input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#result {
+    border: 1px dotted #ccc;
+    padding: 3px;
+}
+
+#result ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#result ul li {
+    padding: 5px 0;
+}
+
+#result ul li:hover {
+    background: #eee;
+}
