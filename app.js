@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
-const itemPairs = require('./itemID.js');
+const itemPairs = require('./item_info/itemID.js');
 
 let currTime = Date.now();
 let oneWeekAgo = currTime - (60 * 60 * 24 * 1000 * 7);
@@ -12,7 +12,7 @@ const app = express();
 
 const PORT = 3000;
 
-const db = new sqlite3.Database('./ge.db', sqlite3.OPEN_READWRITE, (err) => {
+const db = new sqlite3.Database('./database/ge.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) console.log(err);
     console.log("Database connection: successful");
 })

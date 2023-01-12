@@ -9,7 +9,7 @@ const INTERVAL_TIME_MILLIS = 1000 * 60 * 5;
 const itemInfoRequest = axios.get(ITEM_INFO_URL);
 const itemPriceRequest = axios.get(ITEM_PRICES_URL);
 
-const db = new sqlite3.Database('./ge.db', sqlite3.OPEN_READWRITE, (err) => {
+const db = new sqlite3.Database('./database/ge.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) console.log(err);
 
     console.log('Database connection successful');
@@ -76,7 +76,7 @@ function retrieveData() {
 
 //updating Data
 try {
-    const data = fs.readFileSync('updateData.JSON', 'utf8');
+    const data = fs.readFileSync('./update_delete/updateData.JSON', 'utf8');
     if (data) {
         let sqlUpdate = `UPDATE grandExchange SET timestamp = ? item_id  = ? item_name = ? high_price = ? low_price = ? WHERE timestamp = ? item_id = ? item_name = ? high_price = ? low_price = ?`
 
@@ -91,7 +91,7 @@ try {
 
 //deleting Data
 try {
-    const data = fs.readFileSync('deleteData.JSON', 'utf8');
+    const data = fs.readFileSync('./update_delete/deleteData.JSON', 'utf8');
     if (data) {
         let sqlDelete = `UPDATE grandExchange SET timestamp = ? item_id  = ? item_name = ? high_price = ? low_price = ? WHERE timestamp = ? item_id = ? item_name = ? high_price = ? low_price = ?`
 

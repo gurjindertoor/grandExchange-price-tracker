@@ -6,4 +6,4 @@ COPY . /app/
 
 RUN npm i 
 
-CMD [ "node", "/app/app.js" ]
+CMD [ "node", "/app/app.js" ]  
