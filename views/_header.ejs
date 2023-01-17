@@ -84,7 +84,7 @@
         const matchList = document.getElementById('match-list');
 
         const searchItems = async (searchText) => {
-            const res = await fetch('public/items.json');
+            const res = await fetch('/public/items.json');
             const items = await res.json();
 
             // Get matches to current text input

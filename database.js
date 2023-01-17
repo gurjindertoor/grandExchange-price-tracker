@@ -4,15 +4,18 @@ const fs = require('fs');
 
 const ITEM_INFO_URL = "https://prices.runescape.wiki/api/v1/osrs/mapping";
 const ITEM_PRICES_URL = "https://prices.runescape.wiki/api/v1/osrs/latest";
-const INTERVAL_TIME_MILLIS = 1000 * 60 * 5;
+const INTERVAL_TIME_MILLIS = 1000 * 30;
 
 const itemInfoRequest = axios.get(ITEM_INFO_URL);
 const itemPriceRequest = axios.get(ITEM_PRICES_URL);
 
-const db = new sqlite3.Database('./database/ge.db', sqlite3.OPEN_READWRITE, (err) => {
-    if (err) console.log(err);
+let currEpochTime = Date.now();
+let currentTime = new Date(currEpochTime);
 
-    console.log('Database connection successful');
+const db = new sqlite3.Database('database/ge.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) console.log(err);
+    db.run('PRAGMA journal_mode = WAL;');
+    console.log(`Database connection successful at: ${currentTime}`);
 })
 
 const sql = `INSERT INTO "grandExchange"(timestamp, item_id, item_name, high_price, low_price)
@@ -57,14 +60,15 @@ function retrieveData() {
             })
         })
         .then(() => {
-            let epochTime = Date.now();
+            let epochTime = Date.now()
+            let currTime = new Date(epochTime)
 
             for (const item of results) {
                 db.run(sql, [epochTime, item.id, item.name, item.highPrice, item.lowPrice], (err) => {
                     if (err) console.log(err);
                 })
             }
-            console.log(`${epochTime}: Completed`);
+            console.log(`Completed at: ${currTime}`);
 
             itemInfo = [], itemPrices = [], results = [];
 
