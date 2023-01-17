@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const ITEM_INFO_URL = "https://prices.runescape.wiki/api/v1/osrs/mapping";
 const ITEM_PRICES_URL = "https://prices.runescape.wiki/api/v1/osrs/latest";
-const INTERVAL_TIME_MILLIS = 1000 * 30;
+const INTERVAL_TIME_MILLIS = 1000 * 60 * 5;
 
 const itemInfoRequest = axios.get(ITEM_INFO_URL);
 const itemPriceRequest = axios.get(ITEM_PRICES_URL);
