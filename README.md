@@ -1,0 +1,1 @@
+This project tracks high prices and low prices of OldSchool RuneScape items in real-time. The project also calculates the average high price and average low price in a 24 hour cycle. The data is visualized in both table and graph format.
