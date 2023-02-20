@@ -42,10 +42,18 @@
                     <%= item.low_price.toLocaleString("en-US")%>
                   </td>
                   <td>
-                    <%=highAvg.toLocaleString("en-US")%>
+                    <% if (highAvg !==undefined && highAvg !==null) { %>
+                      <%= highAvg.toLocaleString("en-US") %>
+                        <% } else { %>
+                          N/A
+                          <% } %>
                   </td>
                   <td>
-                    <%=lowAvg.toLocaleString("en-US")%>
+                    <% if (lowAvg !==undefined && lowAvg !==null) { %>
+                      <%= lowAvg.toLocaleString("en-US") %>
+                        <% } else { %>
+                          N/A
+                          <% } %>
                   </td>
                 </tr>
               </tbody>
