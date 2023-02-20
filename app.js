@@ -197,7 +197,6 @@ app.get('/item/:id', (req, res) => {
 
             highAverage = Math.floor(tempHigh / lastDayHighPrices.length);
             lowAverage = Math.floor(tempLow / lastDayLowPrices.length);
-
         })
 
         db.get(sqlGrabRecent, [], (err, row) => {
