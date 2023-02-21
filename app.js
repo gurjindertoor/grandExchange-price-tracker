@@ -29,13 +29,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
-    let itemTimestamp = [], itemHighPrice = [], itemLowPrice = [], itemInfo = [], lastDayHighPrices = [], lastDayLowPrices = [];
+    let itemTimestamp = [], itemHighPrice = [], itemLowPrice = [], itemInfo = [];
 
     let item_name = '';
     let recentTime = '';
 
-    let itemNumber, highAverage, lowAverage;
-    let tempHigh = 0, tempLow = 0;
+    let itemNumber;
 
     const itemNameQuery = req.query.itemName;
     const itemCorrected = itemNameQuery.charAt(0).toUpperCase() + itemNameQuery.slice(1);
@@ -74,22 +73,6 @@ app.get('/search', (req, res) => {
                 itemTimestamp.push(dateString);
             }
 
-            db.all(sqlPriceChange, [], (err, row) => {
-                for (const rowItem of row) {
-                    lastDayHighPrices.push(rowItem.high_price);
-                    lastDayLowPrices.push(rowItem.low_price)
-                }
-
-                for (let i = 0; i < lastDayHighPrices.length; i++) {
-                    tempHigh += lastDayHighPrices[i];
-                    tempLow += lastDayLowPrices[i];
-
-                }
-
-                highAverage = Math.floor(tempHigh / lastDayHighPrices.length);
-                lowAverage = Math.floor(tempLow / lastDayLowPrices.length);
-
-            })
 
             db.get(sqlGrabRecent, [], (err, row) => {
                 if (err) console.log(err);
@@ -101,7 +84,7 @@ app.get('/search', (req, res) => {
                 item_name = row.item_name;
                 recentTime = humanDateFormat;
 
-                res.render('search', { labels: itemTimestamp, dataHighPrice: itemHighPrice, dataLowPrice: itemLowPrice, itemID: item_name, recentTime: recentTime, dataInfo: itemInfo, highAvg: highAverage, lowAvg: lowAverage })
+                res.render('search', { labels: itemTimestamp, dataHighPrice: itemHighPrice, dataLowPrice: itemLowPrice, itemID: item_name, recentTime: recentTime, dataInfo: itemInfo })
             })
         } else {
             res.render('error');

@@ -31,6 +31,14 @@ html {
     flex-grow: 1;
 }
 
+
+.btn-success:hover {
+    background-color: maroon;
+    opacity: 1;
+}
+
+
+/* the below is unnecessary but it's kept just in case */
 .btn.btn-search {
     border-radius: 0;
     height: 50px;
