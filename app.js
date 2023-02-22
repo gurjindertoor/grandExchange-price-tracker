@@ -10,7 +10,7 @@ let lastDay = currTime - (60 * 60 * 24 * 1000);
 
 const app = express();
 
-const PORT = 3000;
+const PORT = 80;
 
 const db = new sqlite3.Database('./database/ge.db', sqlite3.OPEN_READONLY, (err) => {
     if (err) console.log(err);
