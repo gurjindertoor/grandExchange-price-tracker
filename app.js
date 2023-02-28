@@ -48,8 +48,6 @@ app.get('/search', (req, res) => {
 
     let sqlGrabInfo = `SELECT timestamp, item_id, item_name, high_price, low_price FROM grandExchange WHERE item_ID = ${itemNumber} AND timestamp > ${oneWeekAgo}`;
 
-    let sqlPriceChange = `SELECT timestamp, item_id, item_name, high_price, low_price FROM grandExchange WHERE item_ID = ${itemNumber} AND timestamp > ${lastDay}`;
-
     let sqlGrabRecent = `SELECT timestamp, item_id, item_name, high_price, low_price FROM grandExchange WHERE item_ID = ${itemNumber} ORDER BY timestamp DESC LIMIT 1`;
 
     db.all(sqlGrabInfo, [], (err, row) => {

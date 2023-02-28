@@ -6,16 +6,10 @@ const ITEM_INFO_URL = "https://prices.runescape.wiki/api/v1/osrs/mapping";
 const ITEM_PRICES_URL = "https://prices.runescape.wiki/api/v1/osrs/latest";
 const INTERVAL_TIME_MILLIS = 1000 * 60 * 5;
 
-const itemInfoRequest = axios.get(ITEM_INFO_URL);
-const itemPriceRequest = axios.get(ITEM_PRICES_URL);
-
-let currEpochTime = Date.now();
-let currentTime = new Date(currEpochTime);
-
 const db = new sqlite3.Database('database/ge.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) console.log(err);
     db.run('PRAGMA journal_mode = WAL;');
-    console.log(`Database connection successful at: ${currentTime}`);
+    console.log(`Database connection successful`);
 })
 
 const sql = `INSERT INTO "grandExchange"(timestamp, item_id, item_name, high_price, low_price)
@@ -24,29 +18,24 @@ const sql = `INSERT INTO "grandExchange"(timestamp, item_id, item_name, high_pri
 let itemInfo = [], itemPrices = [], results = [];
 
 function retrieveData() {
-    axios.all([itemInfoRequest, itemPriceRequest])
-        .then(axios.spread((...responses) => {
-            const itemInfoResponse = responses[0];
-            const itemPriceResponse = responses[1];
-
-            for (const item of itemInfoResponse.data) {
-                itemInfo.push({
+    axios.all([axios.get(ITEM_INFO_URL), axios.get(ITEM_PRICES_URL)])
+        .then(axios.spread((itemInfoResponse, itemPriceResponse) => {
+            itemInfo = itemInfoResponse.data.map(item => {
+                return {
                     name: item.name,
                     id: item.id,
-                })
-            }
-            const { data } = itemPriceResponse;
-            const itemPricesInfo = Object.entries(data.data);
+                }
+            });
 
-            for (const [itemID, value] of itemPricesInfo) {
-                itemPrices.push({
+            const { data } = itemPriceResponse;
+            itemPrices = Object.entries(data.data).map(([itemID, value]) => {
+                return {
                     id: parseInt(itemID),
                     highPrice: value.high,
                     lowPrice: value.low,
-                })
-            }
-        }))
-        .then(() => {
+                }
+            });
+
             results = itemInfo.map((e, i) => {
                 let temp = itemPrices.find(element => element.id === e.id);
                 if (temp !== undefined) {
@@ -57,22 +46,20 @@ function retrieveData() {
                     e.lowPrice = -1;
                 }
                 return e;
-            })
-        })
-        .then(() => {
+            });
+
             let epochTime = Date.now()
-            let currTime = new Date(epochTime)
 
             for (const item of results) {
                 db.run(sql, [epochTime, item.id, item.name, item.highPrice, item.lowPrice], (err) => {
                     if (err) console.log(err);
                 })
             }
-            console.log(`Completed at: ${currTime}`);
+            console.log(`Completed at: ${new Date(epochTime)}`);
 
             itemInfo = [], itemPrices = [], results = [];
 
-        })
+        }))
         .catch((err) => {
             if (err) console.log(err);
         })
@@ -108,6 +95,4 @@ try {
     if (err) console.log(err);
 }
 
-
-// module.exports = retrieveData;
 const insertDataToDB = setInterval(retrieveData, INTERVAL_TIME_MILLIS);
