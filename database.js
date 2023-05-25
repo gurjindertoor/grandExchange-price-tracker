@@ -2,21 +2,25 @@ const sqlite3 = require('sqlite3').verbose();
 const axios = require('axios');
 const fs = require('fs');
 
+// Defining URLs for fetching item information and prices
 const ITEM_INFO_URL = "https://prices.runescape.wiki/api/v1/osrs/mapping";
 const ITEM_PRICES_URL = "https://prices.runescape.wiki/api/v1/osrs/latest";
 const INTERVAL_TIME_MILLIS = 1000 * 60 * 5;
 
+// Creating a new SQLite database connection
 const db = new sqlite3.Database('database/ge.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) console.log(err);
     db.run('PRAGMA journal_mode = WAL;');
     console.log(`Database connection successful`);
 })
 
+// SQL command to insert data into the "grandExchange" table
 const sql = `INSERT INTO "grandExchange"(timestamp, item_id, item_name, high_price, low_price)
                 VALUES(?,?,?,?,?)`;
 
 let itemInfo = [], itemPrices = [], results = [];
 
+// Function to fetch data from the URLs and process it
 function retrieveData() {
     axios.all([axios.get(ITEM_INFO_URL), axios.get(ITEM_PRICES_URL)])
         .then(axios.spread((itemInfoResponse, itemPriceResponse) => {
@@ -35,7 +39,8 @@ function retrieveData() {
                     lowPrice: value.low,
                 }
             });
-
+        
+            // Joining item information and prices based on item id
             results = itemInfo.map((e, i) => {
                 let temp = itemPrices.find(element => element.id === e.id);
                 if (temp !== undefined) {
@@ -65,7 +70,7 @@ function retrieveData() {
         })
 };
 
-//updating Data
+// Updating Data from a JSON file
 try {
     const data = fs.readFileSync('./update_delete/updateData.JSON', 'utf8');
     if (data) {
@@ -80,7 +85,7 @@ try {
     if (err) console.log(err);
 }
 
-//deleting Data
+// Deleting Data from a JSON file
 try {
     const data = fs.readFileSync('./update_delete/deleteData.JSON', 'utf8');
     if (data) {
