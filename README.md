@@ -19,18 +19,18 @@ Make sure you have Node.js and npm installed in your system. If not, you can dow
 
 1. Clone the repo
 ```bash
-git clone https://github.com/gurjindertoor/grandExchange_price_tracker.git```
+git clone https://github.com/gurjindertoor/grandExchange_price_tracker.git
 
 2. Install NPM packages
 ```cd grandExchange_price_tracker
-npm install```
+npm install
 
 ### Usage
 To start the application, open two terminals, in the first run:
-```node app.js```
+```node app.js
 
 And in the second, run:
-```node database.js```
+```node database.js
 
 https://www.rsgraph.com
 
