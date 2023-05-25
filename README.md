@@ -19,4 +19,4 @@ Make sure you have Node.js and npm installed in your system. If not, you can dow
 
 1. Clone the repo
 ```bash
-git clone https://github.com/gurjindertoor/grandExchange_price_tracker.git```
+git clone https://github.com/gurjindertoor/grandExchange_price_tracker.git
