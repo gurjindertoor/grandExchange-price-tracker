@@ -68,6 +68,7 @@ Contributions are what make the open source community such an amazing place to l
 
 This project is open source and available under the [MIT License](https://github.com/gurjindertoor/grandExchange_price_tracker/blob/main/LICENSE).
 
+## Images
 ![ge_1](https://github.com/gurjindertoor/grandExchange_price_tracker/assets/78512847/247a703a-231d-47ce-9bbd-7c772465b51d)
 
 ![ge_5](https://github.com/gurjindertoor/grandExchange_price_tracker/assets/78512847/98f63786-6202-407b-afcb-5b5382363a6a)
