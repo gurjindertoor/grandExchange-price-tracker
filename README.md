@@ -31,18 +31,13 @@ Make sure you have Node.js and npm installed in your system. If not, you can dow
     ```
 
 ### Usage
-To start the application, open two terminals, in the first run:
+To start the application, run the following command in the terminal:
 
    ```bash
-   node app.js
+   npm start
    ```
 
-And in the second, run:
-   ```bash
-   node database.js
-   ```
-
-By default, the application will start running on http://localhost:80.
+By default, the application will start running on http://localhost:3001.
 
 ## REST API Endpoints
 

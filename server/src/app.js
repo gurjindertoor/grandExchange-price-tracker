@@ -35,6 +35,6 @@ app.use('/search', searchRouter);
 
 app.listen(3001, () => console.log("SERVER STARTED"));
 
-const INTERVAL_TIME_MILLIS = 1000 * 60 * 2; // Every 2 minutes
+const INTERVAL_TIME_MILLIS = 1000 * 60 * 5; // Retrieve API data every 5 minutes
 
 setInterval(retrieveData, INTERVAL_TIME_MILLIS);
