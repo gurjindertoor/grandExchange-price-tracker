@@ -1,0 +1,85 @@
+<%- include("_header") -%>
+
+<body>
+  <div class="card mx-auto w-75 justify-content-center" style="z-index: 0; overflow-x: scroll; background-color: lightgray;">
+    <h1 style="text-align: center;">List of Items</h1>
+
+    <div>
+      <table class="table table-striped" style="background-color: lightgray;">
+        <thead>
+          <tr>
+            <th scope="col">Item Name</th>
+            <th scope="col">Item ID</th>
+            <th scope="col">High Price</th>
+            <th scope="col">Low Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const item of data) { %>
+            <tr>
+              <td>
+                <a href="/search?itemName=<%= encodeURIComponent(item.item_name) %>">
+                  <%= item.item_name %>
+                </a>
+              </td>
+              <td>
+                <%= item.item_id %>
+              </td>
+              <td>
+                <% if (item.high_price === -1) { %>
+                  N/A
+                <% } else { %>
+                  <%= item.high_price.toLocaleString() %>
+                <% } %>
+              </td>
+              <td>
+                <% if (item.low_price === -1) { %>
+                  N/A
+                <% } else { %>
+                  <%= item.low_price.toLocaleString() %>
+                <% } %>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <nav aria-label="Page Navigation">
+    <div class="d-flex justify-content-center">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="/items?page=<%= page - 1 %>" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only"></span>
+          </a>
+        </li>
+        <% for (let i = iterator; i <= endLink; i++) { %>
+          <% if (i === page) { %>
+            <li class="page-item">
+              <a class="page-link" href="/items?page=<%= i %>">
+                <%= i %>
+              </a>
+            </li>
+          <% } else { %>
+            <li class="page-item">
+              <a class="page-link" href="/items?page=<%= i %>">
+                <%= i %>
+              </a>
+            </li>
+          <% } %>
+        <% } %>
+        <li class="page-item">
+          <a class="page-link" href="/items?page=<%= page + 1 %>" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+</body>
+
+<%- include("_footer") -%>
