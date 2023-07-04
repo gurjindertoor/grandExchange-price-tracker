@@ -22,7 +22,7 @@ The application provides several REST API endpoints:
 
 ## License
 
-This project is open source and available under the [MIT License](https://github.com/gurjindertoor/grandExchange_price_tracker/blob/main/LICENSE).
+This project is available under the [MIT License](https://github.com/gurjindertoor/grandExchange_price_tracker/blob/main/LICENSE).
 
 ## Images
 ![ge_1](https://github.com/gurjindertoor/grandExchange_price_tracker/assets/78512847/247a703a-231d-47ce-9bbd-7c772465b51d)
