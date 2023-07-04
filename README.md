@@ -2,42 +2,13 @@
 https://www.rsgraph.com
 
 ## Description
-This project is an application that uses JavaScript, Express.JS, Plotly, SQLite3, and APIs to interact with the Runescape Grand Exchange Database. It fetches the latest item information and prices from the Runescape Grand Exchange, stores it in a local SQLite database, and provides visualization using Plotly.
+This project is an application that uses JavaScript, Express.JS, Plotly, MongoDB, and API requests to interact with the Runescape Grand Exchange API. It fetches the latest item information and prices from the Runescape Grand Exchange API every 5 minutes, stores it into a MongoDB database, and provides visualization using Plotly.
 
 ## Features
-* Fetches and updates data every five minutes from the Runescape Grand Exchange database.
-* Stores data in a local SQLite database.
-* Updates and deletes records from a SQLite database using JSON files.
+* Fetches and updates data every five minutes from the Runescape Grand Exchange API.
+* Stores data in MongoDB
+* Updates and deletes records from a MongoDB database using JSON files.
 * Visualizes data using Plotly.
-
-## Setup and Installation
-
-### Prerequisites
-
-Make sure you have Node.js and npm installed in your system. If not, you can download them from [here](https://nodejs.org/).
-
-### Installation
-1. Clone the repo 
-
-    ```bash
-    git clone https://github.com/gurjindertoor/grandExchange_price_tracker.git
-    ```
-
-2. Install NPM Packages
-
-    ```bash
-    cd grandExchange_price_tracker
-    npm install
-    ```
-
-### Usage
-To start the application, run the following command in the terminal:
-
-   ```bash
-   npm start
-   ```
-
-By default, the application will start running on http://localhost:3001.
 
 ## REST API Endpoints
 
@@ -48,16 +19,6 @@ The application provides several REST API endpoints:
 - `GET /items` - Serves the items page, showing all available items in the database.
 - `GET /item/:id` - Serves a specific item page, showing all details for an item.
 - `GET /faqs` - Serves the FAQs page.
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## License
 
