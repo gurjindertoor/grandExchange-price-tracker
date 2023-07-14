@@ -1,5 +1,5 @@
 # Runescape Grand Exchange Database
-https://www.rsgraph.com
+
 
 ## Description
 This project is an application that uses JavaScript, Express.JS, Plotly, MongoDB, and API requests to interact with the Runescape Grand Exchange API. It fetches the latest item information and prices from the Runescape Grand Exchange API every 5 minutes, stores it into a MongoDB database, and provides visualization using Plotly.
